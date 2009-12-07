@@ -23,9 +23,9 @@ This module allows you to update your ZoneEdit ( http://www.zoneedit.com/ )
 dynamic DNS records. This is done via an http get using the L<libwww-perl>
 modules.
 
- 	use DNS::ZoneEdit;
+	use DNS::ZoneEdit;
 
-	my $ze = DNS::ZoneEdit->new;
+	my $ze = DNS::ZoneEdit->new();
 	$ze->update( username => "foo", password => "bar" ) || die "Failed: $@";
 
 =head1 METHODS
@@ -169,30 +169,32 @@ sub get_basic_credentials { ($_[0]->{"username"}, $_[0]->{"password"}) }
 =head1 NOTES
 
 There are some example scripts in the C<examples> directory of the module
-distribution. These are designed to run out of cron (or similar). You
-should not run them to often to avoid overloading the ZoneEdit servers. Ideally
+distribution. These are designed to run out of cron (or similar). You should
+not run them too often to avoid overloading the ZoneEdit servers. Ideally
 your code should cache the existing value for your IP, and only update
 ZoneEdit when it changes.
 
 =head1 ACKNOWLEDGEMENTS
 
-It is actually based on Gavin Brock's excellent DNS::EasyDNS.
+This module is based on Gavin Brock's excellent L<DNS::EasyDNS>.
 
 For more information about the ZoneEdit services please visit 
 http://www.zoneedit.com/. This module is not written nor supported by 
 ZoneEdit LLC.
 
-=head1 COPYRIGHT & LICENSE
+=head1 COPYRIGHT
 
-Copyright 2009 Evan Giles, all rights reserved.
+Copyright (c) 2003-2006 Gavin Brock gbrock@cpan.org,
+Copyright 2009 Evan Giles.
+
+All rights reserved.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
 
-
 =head1 SEE ALSO
 
-L<LWP::UserAgent> L<DNS::EasyDNS>
+L<LWP::UserAgent>, L<DNS::EasyDNS>
 
 =cut
 

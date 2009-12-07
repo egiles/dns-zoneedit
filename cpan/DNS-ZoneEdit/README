@@ -16,10 +16,6 @@ To install this module type the following:
    make test
    make install
 
-If you are using Activestate perl, you can also install as a PPM:
-
-   ppm install --location=http://brock-family.org/gavin/perl/ppm DNS::ZoneEdit
-
 #==============================================================================#
 
 DEPENDENCIES
@@ -37,8 +33,13 @@ the network. For this, install:
 
 COPYRIGHT AND LICENCE
 
-This module is Copyright (c) 2003 Gavin Brock gbrock@cpan.org. All rights 
-reserved. This program is free software; you can redistribute it and/or
-modify it under the same terms as Perl itself.
+This module is based on Gavin Brock's DNS::EasyDNS (Copyright(c) 2003 Gavin
+Brock gbrock@cpan.org). It has been modified for use with ZoneEdit by Evan
+Giles (Copyright 2009).
+
+All rights reserved.
+
+This program is free software; you can redistribute it and/or modify it under
+the same terms as Perl itself.
 
 #==============================================================================#
