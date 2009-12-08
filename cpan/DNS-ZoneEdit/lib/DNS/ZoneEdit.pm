@@ -11,7 +11,7 @@ use base qw(LWP::UserAgent);
 
 use constant URL => 'dynamic.zoneedit.com/auth/dynamic.html';
 
-our $VERSION = 0.01;
+our $VERSION = 0.02;
 
 =head1 NAME
 
@@ -26,7 +26,7 @@ modules.
 	use DNS::ZoneEdit;
 
 	my $ze = DNS::ZoneEdit->new();
-	$ze->update( username => "foo", password => "bar" ) || die "Failed: $@";
+	$ze->update( hostname => "cpan.org", username => "foo", password => "bar" ) || die "Failed: $@";
 
 =head1 METHODS
 
@@ -186,8 +186,6 @@ ZoneEdit LLC.
 
 Copyright (c) 2003-2006 Gavin Brock gbrock@cpan.org,
 Copyright 2009 Evan Giles.
-
-All rights reserved.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
