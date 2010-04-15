@@ -1,0 +1,5 @@
+libdns-zoneedit-perl (0.02-1) unstable; urgency=low
+
+  * Initial Release.
+
+ -- Evan Giles <evan@groening.wgtn.cat-it.co.nz>  Fri, 12 Mar 2010 13:04:38 +1300

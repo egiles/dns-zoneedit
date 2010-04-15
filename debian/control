@@ -1,0 +1,16 @@
+Source: libdns-zoneedit-perl
+Section: perl
+Priority: optional
+Build-Depends: debhelper (>= 5)
+Build-Depends-Indep: perl (>= 5.6.10-12)
+Maintainer: Evan Giles <evan@groening.wgtn.cat-it.co.nz>
+Standards-Version: 3.8.0
+Homepage: http://search.cpan.org/dist/DNS-ZoneEdit/
+
+Package: libdns-zoneedit-perl
+Architecture: all
+Depends: ${perl:Depends}, ${misc:Depends}, libwww-perl (>= 2.001), libwww-perl (>= 1.19)
+Description: Update your ZoneEdit dynamic DNS records
+ Update your ZoneEdit dynamic DNS records
+ .
+ This description was automagically extracted from the module by dh-make-perl.
