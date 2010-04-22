@@ -11,7 +11,7 @@ use base qw(LWP::UserAgent);
 
 use constant URL => 'dynamic.zoneedit.com/auth/dynamic.html';
 
-our $VERSION = 0.02;
+our $VERSION = 0.03;
 
 =head1 NAME
 
