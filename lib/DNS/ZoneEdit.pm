@@ -185,7 +185,7 @@ ZoneEdit LLC.
 =head1 COPYRIGHT
 
 Copyright (c) 2003-2006 Gavin Brock gbrock@cpan.org,
-Copyright 2009 Evan Giles.
+Copyright 2009-2010 Evan Giles.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
