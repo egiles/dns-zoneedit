@@ -63,7 +63,7 @@ sub _can_do_https {
 }
 
 
-=item $ze->update(%args);
+=item update(%args);
 
 Updates your ZoneEdit dynamic DNS records. Valid C<%args> are:
 
@@ -81,16 +81,16 @@ C<myip> - The IP address of the client to be updated.  This
 defaults to the IP address of the incoming connection (handy if you are
 being natted).
 
-C<secure> - Values are either C<1> or C<0>. If C<1>, then SSL https is used to connect
-to ZoneEdit. The SSL connection has the big advantage
-that your passwords are not passed in plain-text accross the internet. Secure is on by
+C<secure> - Values are either C<1> or C<0>. If C<1>, then SSL https is used to
+connect to ZoneEdit. The SSL connection has the big advantage that your 
+passwords are not passed in plain-text accross the internet. Secure is on by
 default if Crypt::SSLeay is installed. A warning will be generated if it's not
-installed, unless you set C<secure => 0>. If you set C<secure => 1> and the module is
-unavailable, the module will C<croak>.
+installed, unless you set C<secure => 0>. If you set C<secure => 1> and the
+module is unavailable, the module will C<croak>.
 
 =back
 
-The function returns C<TRUE> of success. On failure it returns C<FALSE> and 
+Returns C<TRUE> of success. On failure it returns C<FALSE> and 
 sets C<$@>.
 
 =cut
@@ -152,13 +152,11 @@ sub update {
 	}
 }
 
-=item DNS::ZoneEdit->get_basic_credentials();
+=item get_basic_credentials();
 
 Since ZoneEdit object is an inheritted L<LWP::UserAgent>, it overrides
 this UserAgent method for your convenience. It uses the credentials passed
 in the constructor. There is no real reason to override, or call this.
-
-	sub get_basic_credentials { ($_[0]->{"username"}, $_[0]->{"password"}) }
 
 =cut
 
@@ -187,7 +185,7 @@ ZoneEdit LLC.
 Copyright (c) 2003-2006 Gavin Brock gbrock@cpan.org,
 Copyright 2009-2010 Evan Giles.
 
-This program is free software; you can redistribute it and/or modify it
+This module is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
 
 =head1 SEE ALSO
