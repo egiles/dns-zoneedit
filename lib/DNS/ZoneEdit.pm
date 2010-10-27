@@ -11,7 +11,7 @@ use base qw(LWP::UserAgent);
 
 use constant URL => 'dynamic.zoneedit.com/auth/dynamic.html';
 
-our $VERSION = 0.03;
+our $VERSION = 0.04;
 
 =head1 NAME
 
@@ -37,9 +37,10 @@ modules.
 =item DNS::ZoneEdit->new();
 
 Create a new ZoneEdit object. This is actually an inheritted L<LWP::UserAgent>
-so you may like to use some of the UserAgent methods. For example,
+object so you can use some of the UserAgent methods. For example,
 if you are behind a proxy server:
 
+	my $ze = DNS::ZoneEdit->new();
 	$ze->proxy('http', 'http://proxy.sn.no:8001/');
 
 =cut
@@ -73,19 +74,24 @@ C<username> - Your ZoneEdit login name. This is required.
 
 C<password> - The corresponding password. This is required.
 
-C<hostname> - The full host being updated. This is required.
+C<hostname> - The FQDN of host being updated. This is required.
+
 Contains a comma-delimited list of hosts that have IP addresses. This parameter
-may be *.domain.com to update a wildcard A-record.
+may be C<*.domain.com> to update a wildcard A-record.
 
 C<myip> - The IP address of the client to be updated.  This
 defaults to the IP address of the incoming connection (handy if you are
 being natted).
 
+C<tld> - The root domain of your hostname, for example if your hostname is
+C<example.co.uk> you can set C<tld> to C<co.uk>.  This is an undocumented 
+"feature" of zoneedit where you sometimes need to specify it to update your zone.
+
 C<secure> - Values are either C<1> or C<0>. If C<1>, then SSL https is used to
 connect to ZoneEdit. The SSL connection has the big advantage that your 
 passwords are not passed in plain-text accross the internet. Secure is on by
 default if Crypt::SSLeay is installed. A warning will be generated if it's not
-installed, unless you set C<secure => 0>. If you set C<secure => 1> and the
+installed unless you set C<secure> to C<0>. If you set C<secure>  to C<1> and the
 module is unavailable, the module will C<croak>.
 
 =back
@@ -104,6 +110,7 @@ sub update {
 		elsif ( $k eq "password" ) { $obj->{"password"} = $v }
 		elsif ( $k eq "hostname" ) { $get{host} = $v         }
 		elsif ( $k eq "myip"     ) { $get{dnsto} = $v        }
+		elsif ( $k eq "tld"      ) { $get{zones} = $v        }
 		elsif ( $k eq "secure"   ) { $obj->{"secure"} = $v   }
 		else { carp "update(): Bad argument $k" }
 	}
@@ -156,7 +163,7 @@ sub update {
 
 Since ZoneEdit object is an inheritted L<LWP::UserAgent>, it overrides
 this UserAgent method for your convenience. It uses the credentials passed
-in the constructor. There is no real reason to override, or call this.
+in the constructor. There is no real reason to call, or override this method.
 
 =cut
 
