@@ -84,8 +84,9 @@ defaults to the IP address of the incoming connection (handy if you are
 being natted).
 
 C<tld> - The root domain of your hostname, for example if your hostname is
-C<example.co.uk> you can set C<tld> to C<co.uk>.  This is an undocumented 
-"feature" of zoneedit where you sometimes need to specify it to update your zone.
+C<example.co.uk> you can set C<tld> to C<co.uk>.  This is to support an
+undocumented "feature" of zoneedit where you sometimes need to specify it to
+to update your zone.
 
 C<secure> - Values are either C<1> or C<0>. If C<1>, then SSL https is used to
 connect to ZoneEdit. The SSL connection has the big advantage that your 
@@ -96,7 +97,7 @@ module is unavailable, the module will C<croak>.
 
 =back
 
-Returns C<TRUE> of success. On failure it returns C<FALSE> and 
+Returns C<TRUE> on success. On failure it returns C<FALSE> and 
 sets C<$@>.
 
 =cut
