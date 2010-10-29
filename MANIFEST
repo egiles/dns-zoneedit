@@ -4,6 +4,7 @@ MANIFEST
 README
 lib/DNS/ZoneEdit.pm
 t/01.basic.t
+t/05.params.t
 t/90.pod.t
 t/91.podcoverage.t
 examples/zoneedit-simple
