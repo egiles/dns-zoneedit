@@ -161,7 +161,7 @@ sub update {
 
 Since a ZoneEdit object is an inheritted L<LWP::UserAgent>, it overrides
 this UserAgent method for your convenience. It uses the credentials passed
-in the constructor. There is no real reason to call, or override this method.
+in the update method. There is no real reason to call, or override this method.
 
 =cut
 
