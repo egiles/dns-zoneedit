@@ -11,7 +11,7 @@ use base qw(LWP::UserAgent);
 
 use constant URL => 'dynamic.zoneedit.com/auth/dynamic.html';
 
-our $VERSION = 0.04;
+our $VERSION = 1.0;
 
 =head1 NAME
 
@@ -20,8 +20,8 @@ DNS::ZoneEdit - Update your ZoneEdit dynamic DNS entries
 =head1 SYNOPSIS
 
 This module allows you to update your ZoneEdit ( http://www.zoneedit.com/ )
-dynamic DNS records. This is done via an http get using the L<libwww-perl>
-modules.
+dynamic DNS records. This is done via an http get using the C<LWP::UserAgent>
+module.
 
 	use DNS::ZoneEdit;
 
@@ -37,7 +37,7 @@ modules.
 =item DNS::ZoneEdit->new();
 
 Create a new ZoneEdit object. This is actually an inheritted L<LWP::UserAgent>
-object so you can use some of the UserAgent methods. For example,
+object so you can use any of the methods defined in that class. For example,
 if you are behind a proxy server:
 
 	my $ze = DNS::ZoneEdit->new();
@@ -78,8 +78,10 @@ sub _make_request_url {
 		if ($self->{secure} && ! _can_do_https()) {
 			croak "Can't run in secure mode - try installing Crypt::SSLeay"
 		}
-	}
-	$self->{secure} = _can_do_https();
+	} else {
+	    $self->{secure} = _can_do_https();
+    }
+
 	if ( !$self->{secure} ) {
 		carp "** USING INSECURE MODE - PLEASE READ THE DOCUMENTATION **\n";
 	}
@@ -159,7 +161,7 @@ sub update {
 
 =item get_basic_credentials();
 
-Since a ZoneEdit object is an inheritted L<LWP::UserAgent>, it overrides
+Since a ZoneEdit object is an subclass of C<LWP::UserAgent>, it overrides
 this UserAgent method for your convenience. It uses the credentials passed
 in the update method. There is no real reason to call, or override this method.
 
