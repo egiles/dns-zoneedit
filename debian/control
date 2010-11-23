@@ -9,7 +9,7 @@ Homepage: http://search.cpan.org/dist/DNS-ZoneEdit/
 
 Package: libdns-zoneedit-perl
 Architecture: all
-Depends: ${perl:Depends}, ${misc:Depends}, libwww-perl (>= 2.001), libwww-perl (>= 1.19)
+Depends: ${perl:Depends}, ${misc:Depends}, libwww-perl (>= 2.001)
 Description: Update your ZoneEdit dynamic DNS records
  Update your ZoneEdit dynamic DNS records
  .

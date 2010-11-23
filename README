@@ -22,7 +22,7 @@ DEPENDENCIES
 
 This module requires at least perl 5.6.0 and these other modules and libraries:
 
-  LWP::UserAgent and HTTP::Request from the libwww-perl bundle
+  LWP::UserAgent from the libwww-perl bundle
 
 It is also highly recommended to use SSL to avoid plain text passwords over
 the network. For this, install:

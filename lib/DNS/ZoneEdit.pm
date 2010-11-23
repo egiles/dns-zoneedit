@@ -5,7 +5,6 @@ use strict;
 use Carp;
 use LWP::UserAgent;
 use CGI::Util qw(escape);
-use HTTP::Request::Common qw(GET);
 
 use base qw(LWP::UserAgent);
 
@@ -76,7 +75,7 @@ sub _make_request_url {
 
 	if (defined $self->{secure}) {
 		if ($self->{secure} && ! _can_do_https()) {
-			croak "Can't run in secure mode - try installing Crypt::SSLeay"
+			croak "Can't run in secure mode - try installing Crypt::SSLeay";
 		}
 	} else {
 	    $self->{secure} = _can_do_https();
@@ -144,7 +143,7 @@ sub update {
 
 	my $update = $self->_make_request_url(%args);
 
-	my $resp = $self->request(GET $update);
+	my $resp = $self->get($update);
 	if ($resp->is_success) {
 		chomp(my $content = $resp->content);
 		if ( $content =~ m/CODE="2\d+"/ ) {

@@ -1,7 +1,8 @@
 Revision history for Perl extension DNS::ZoneEdit.
 
-1.0  YYYY/MM/DD 1.0 Release, module now has confirmed users
+1.0  2010/11/29 1.0 Release, module now has confirmed users
                 Restructure to allow for better testing
+                Remove unnecessary references to HTTP::Request module
 
 0.04 2010/10/29 Allow the user to specify a "tld". (RT #62472)
 
