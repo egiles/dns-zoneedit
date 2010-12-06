@@ -78,8 +78,8 @@ sub _make_request_url {
 			croak "Can't run in secure mode - try installing Crypt::SSLeay";
 		}
 	} else {
-	    $self->{secure} = _can_do_https();
-    }
+		$self->{secure} = _can_do_https();
+	}
 
 	if ( !$self->{secure} ) {
 		carp "** USING INSECURE MODE - PLEASE READ THE DOCUMENTATION **\n";

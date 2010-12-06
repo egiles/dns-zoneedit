@@ -2,7 +2,7 @@
   DNS::ZoneEdit
 #==============================================================================#
 
-Access to the ZoneEdit dynamic DNS update API. Included is also an example 
+Access to the ZoneEdit dynamic DNS update API. Also included is an example 
 script that may be all you need to update your DNS.
 
 #==============================================================================#
