@@ -22,6 +22,6 @@ ok(!$ze->update(
 	hostname => 'bogus',
 ), "Check a bogus request");
 
-ok($@ =~ /^HTTP request failed /, "HTTP Error looks correct");
+ok($@ =~ /Request failed/, "Error detected");
 
 #==============================================================================#

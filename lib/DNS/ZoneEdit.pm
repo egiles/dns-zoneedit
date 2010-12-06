@@ -10,7 +10,7 @@ use base qw(LWP::UserAgent);
 
 use constant URL => 'dynamic.zoneedit.com/auth/dynamic.html';
 
-our $VERSION = 1.0;
+our $VERSION = 1.1;
 
 =head1 NAME
 
@@ -149,11 +149,11 @@ sub update {
 		if ( $content =~ m/CODE="2\d+"/ ) {
 			return 1;
 		} else {
-			$@ = 'ZoneEdit said "'.$content.'"';
+			$@ = 'Request failed: "'.$content.'"';
 			return;
 		}
 	} else {
-		$@ = 'HTTP request failed "'.$resp->status_line.'"';
+		$@ = 'HTTP Request failed: "'.$resp->status_line.'"';
 		return;
 	}
 }
