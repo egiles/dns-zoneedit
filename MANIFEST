@@ -5,8 +5,9 @@ README
 lib/DNS/ZoneEdit.pm
 t/01.basic.t
 t/05.params.t
-t/90.pod.t
-t/91.podcoverage.t
+t/99.podcoverage.t
+t/99.pod.t
+t/99.version.t
 examples/zoneedit-simple
 examples/zoneedit-from-router
 examples/zoneedit-by-interface
