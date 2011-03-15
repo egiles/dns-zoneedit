@@ -1,6 +1,6 @@
 blib*
 Makefile
-Makefile.old
+Makefile.*
 Build
 _build*
 pm_to_blib*
