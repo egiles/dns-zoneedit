@@ -10,7 +10,7 @@ my $build = Module::Build->new (
      dist_author => 'Evan Giles <egiles@cpan.org>',
      license  => 'perl',
      requires => {
-        'perl'            => '5.6.1',
+        'perl'            => '5.6.0',
         'LWP::UserAgent'  => 2.001,
      },
      create_makefile_pl => 'traditional',
