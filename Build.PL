@@ -16,7 +16,11 @@ my $build = Module::Build->new (
      create_makefile_pl => 'traditional',
      meta_merge     => {
        resources => {
-         repository => 'http://github.com/egiles/dns-zoneedit',
+         repository => {
+           type => "git",
+           web => 'http://github.com/egiles/dns-zoneedit',
+           url => 'git://github.com/egiles/dns-zoneedit.git',
+         }
        }
      },
      add_to_cleanup => [ 'Makefile.PL', 'META.yml' ],
