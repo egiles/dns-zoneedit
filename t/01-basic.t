@@ -1,11 +1,11 @@
 use strict;
 use warnings;
 
-use Test::More tests => 7;
+use Test::More tests => 6;
 
 #==============================================================================#
 
-BEGIN { use_ok('DNS::ZoneEdit') };
+use DNS::ZoneEdit;
 
 my $ze = DNS::ZoneEdit->new();
 
