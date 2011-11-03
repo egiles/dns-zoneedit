@@ -3,7 +3,6 @@ package DNS::ZoneEdit;
 use warnings;
 use strict;
 use Carp;
-use LWP::UserAgent;
 use CGI::Util qw(escape);
 
 use base qw(LWP::UserAgent);
@@ -73,12 +72,14 @@ sub _make_request_url {
 		else { carp "update(): Bad argument $k" }
 	}
 
-	if (defined $self->{secure}) {
-		if ($self->{secure} && ! _can_do_https()) {
-			croak "Can't run in secure mode - try installing Crypt::SSLeay";
-		}
-	} else {
-		$self->{secure} = _can_do_https();
+	my $https = _can_do_https();
+
+	if ( !defined($self->{secure}) ) {
+		$self->{secure} = $https;
+	}
+
+	if ( $self->{secure} && !$https ) {
+		croak "Can't run in secure mode - try installing Crypt::SSLeay";
 	}
 
 	if ( !$self->{secure} ) {
