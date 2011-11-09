@@ -7,7 +7,9 @@ use CGI::Util qw(escape);
 
 use base qw(LWP::UserAgent);
 
-use constant URL => 'dynamic.zoneedit.com/auth/dynamic.html';
+use constant SITE => "dynamic.zoneedit.com";
+use constant URL => SITE() . '/auth/dynamic.html';
+use constant REALM => "DNS Access";
 
 our $VERSION = 1.1;
 
@@ -82,12 +84,13 @@ sub _make_request_url {
 		croak "Can't run in secure mode - try installing Crypt::SSLeay";
 	}
 
+	my $proto = "https://";
 	if ( !$self->{secure} ) {
-		carp "** USING INSECURE MODE - PLEASE READ THE DOCUMENTATION **\n";
+		$proto = "http://";
+		carp "** USING INSECURE MODE **\n";
 	}
 
 	## Make the GET request URL.
-	my $proto = $self->{"secure"} ? "https://" : "http://";
 	my $query = join('&', map { escape($_)."=".escape($get{$_}) } keys %get);
 	return $proto . URL() . "?" . $query;
 }
@@ -144,6 +147,12 @@ sub update {
 
 	my $update = $self->_make_request_url(%args);
 
+	# Tell LWP::UserAgent about the username/password
+	for my $port ( 80, 443 ) {
+		my $netloc = SITE() . ":$port";
+		$self->credentials($netloc,REALM(),$args{"username"},$args{"password"});
+	}
+
 	my $resp = $self->get($update);
 	if ($resp->is_success) {
 		chomp(my $content = $resp->content);
@@ -159,15 +168,6 @@ sub update {
 	}
 }
 
-=item get_basic_credentials();
-
-Since a ZoneEdit object is an subclass of C<LWP::UserAgent>, it overrides
-this UserAgent method for your convenience. It uses the credentials passed
-in the update method. There is no real reason to call, or override this method.
-
-=cut
-
-sub get_basic_credentials { ($_[0]->{"username"}, $_[0]->{"password"}) }
 
 =back
 
