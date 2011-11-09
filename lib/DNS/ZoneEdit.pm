@@ -46,53 +46,53 @@ if you are behind a proxy server:
 =cut
 
 sub new {
-	my ($pack,@args) = @_;
-	my $obj = $pack->SUPER::new(@args);
-	$obj->agent("DNS::ZoneEdit perl module");
-	return $obj;
+    my ($pack,@args) = @_;
+    my $obj = $pack->SUPER::new(@args);
+    $obj->agent("DNS::ZoneEdit perl module");
+    return $obj;
 }
 
 
 sub _can_do_https {
-	eval "use Crypt::SSLeay";
+    eval "use Crypt::SSLeay";
 
-	return ($@ eq "");
+    return ($@ eq "");
 }
 
 
 sub _make_request_url {
-	my ($self,%args) = @_;
+    my ($self,%args) = @_;
 
-	my %get;
-	while (my ($k,$v) = each %args) {
-		if    ( $k eq "username" ) { $self->{"username"} = $v }
-		elsif ( $k eq "password" ) { $self->{"password"} = $v }
-		elsif ( $k eq "hostname" ) { $get{host} = $v         }
-		elsif ( $k eq "myip"     ) { $get{dnsto} = $v        }
-		elsif ( $k eq "tld"      ) { $get{zones} = $v        }
-		elsif ( $k eq "secure"   ) { $self->{"secure"} = $v   }
-		else { carp "update(): Bad argument $k" }
-	}
+    my %get;
+    while (my ($k,$v) = each %args) {
+        if    ( $k eq "username" ) { $self->{"username"} = $v }
+        elsif ( $k eq "password" ) { $self->{"password"} = $v }
+        elsif ( $k eq "hostname" ) { $get{host} = $v         }
+        elsif ( $k eq "myip"     ) { $get{dnsto} = $v        }
+        elsif ( $k eq "tld"      ) { $get{zones} = $v        }
+        elsif ( $k eq "secure"   ) { $self->{"secure"} = $v   }
+        else { carp "update(): Bad argument $k" }
+    }
 
-	my $https = _can_do_https();
+    my $https = _can_do_https();
 
-	if ( !defined($self->{secure}) ) {
-		$self->{secure} = $https;
-	}
+    if ( !defined($self->{secure}) ) {
+        $self->{secure} = $https;
+    }
 
-	if ( $self->{secure} && !$https ) {
-		croak "Can't run in secure mode - try installing Crypt::SSLeay";
-	}
+    if ( $self->{secure} && !$https ) {
+        croak "Can't run in secure mode - try installing Crypt::SSLeay";
+    }
 
-	my $proto = "https://";
-	if ( !$self->{secure} ) {
-		$proto = "http://";
-		carp "** USING INSECURE MODE **\n";
-	}
+    my $proto = "https://";
+    if ( !$self->{secure} ) {
+        $proto = "http://";
+        carp "** USING INSECURE MODE **\n";
+    }
 
-	## Make the GET request URL.
-	my $query = join('&', map { escape($_)."=".escape($get{$_}) } keys %get);
-	return $proto . URL() . "?" . $query;
+    ## Make the GET request URL.
+    my $query = join('&', map { escape($_)."=".escape($get{$_}) } keys %get);
+    return $proto . URL() . "?" . $query;
 }
 
 =item update(%args);
@@ -134,38 +134,38 @@ sets C<$@>.
 =cut
 
 sub update {
-	my ($self,%args) = @_;
+    my ($self,%args) = @_;
 
-	croak "update(): Argument 'username' is required" 
-		unless defined $args{"username"};
+    croak "update(): Argument 'username' is required" 
+        unless defined $args{"username"};
 
-	croak "update(): Argument 'password' is required" 
-		unless defined $args{"password"};
+    croak "update(): Argument 'password' is required" 
+        unless defined $args{"password"};
 
-	croak "update(): Argument 'hostname' is required" 
-		unless defined $args{"hostname"};
+    croak "update(): Argument 'hostname' is required" 
+        unless defined $args{"hostname"};
 
-	my $update = $self->_make_request_url(%args);
+    my $update = $self->_make_request_url(%args);
 
-	# Tell LWP::UserAgent about the username/password
-	for my $port ( 80, 443 ) {
-		my $netloc = SITE() . ":$port";
-		$self->credentials($netloc,REALM(),$args{"username"},$args{"password"});
-	}
+    # Tell LWP::UserAgent about the username/password
+    for my $port ( 80, 443 ) {
+        my $netloc = SITE() . ":$port";
+        $self->credentials($netloc,REALM(),$args{"username"},$args{"password"});
+    }
 
-	my $resp = $self->get($update);
-	if ($resp->is_success) {
-		chomp(my $content = $resp->content);
-		if ( $content =~ m/CODE="2\d+"/ ) {
-			return 1;
-		} else {
-			$@ = 'Request failed: "'.$content.'"';
-			return;
-		}
-	} else {
-		$@ = 'HTTP Request failed: "'.$resp->status_line.'"';
-		return;
-	}
+    my $resp = $self->get($update);
+    if ($resp->is_success) {
+        chomp(my $content = $resp->content);
+        if ( $content =~ m/CODE="2\d+"/ ) {
+            return 1;
+        } else {
+            $@ = 'Request failed: "'.$content.'"';
+            return;
+        }
+    } else {
+        $@ = 'HTTP Request failed: "'.$resp->status_line.'"';
+        return;
+    }
 }
 
 
