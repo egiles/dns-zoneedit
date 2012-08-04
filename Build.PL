@@ -5,13 +5,6 @@ use warnings;
 
 use Module::Build;
 
-my $repo = "github.com/egiles/dns-zoneedit";
-my $meta1 = "http://$repo";
-my $meta2 = {
-    type => "git",
-    web => $meta1,
-    url => "git://$repo.git",
-};
 
 my $build = Module::Build->new (
      module_name => 'DNS::ZoneEdit',
@@ -22,9 +15,10 @@ my $build = Module::Build->new (
         'LWP::UserAgent'  => 2.001,
      },
      create_makefile_pl => 'traditional',
+     configure_requires => { 'Module::Build' => 0.38 },
      meta_merge     => {
        resources => {
-         repository => Module::Build->can("metafile2") ? $meta2 : $meta1,
+         repository => "http://github.com/egiles/dns-zoneedit",
        }
      },
      add_to_cleanup => [ 'Makefile.PL', 'META.yml' ],

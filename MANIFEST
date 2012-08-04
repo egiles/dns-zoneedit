@@ -13,3 +13,4 @@ examples/zoneedit-simple
 examples/zoneedit-from-router
 examples/zoneedit-by-interface
 META.yml
+META.json
